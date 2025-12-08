@@ -76,22 +76,141 @@ const HeroSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentMetricIndex(prev => (prev + 1) % heroData.metrics.length);
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <section className="hero-section" id="home">
-      <div className="hero-content animate-slide-up">
-        <h1 className="heading-1">{heroData.title}</h1>
-        <p className="body-large" style={{ marginBottom: '2rem' }}>
-          {heroData.subtitle}
-        </p>
-        <p className="body-medium" style={{ marginBottom: '2rem', opacity: 0.8 }}>
-          {heroData.description}
-        </p>
-        
+      <div className="container">
+        <div className="hero-layout">
+          {/* Left Content */}
+          <div className="hero-content animate-slide-up">
+            <div className="hero-badge">
+              Planos a partir de R$ 55
+            </div>
+            
+            <h1 className="heading-1">{heroData.title}</h1>
+            <p className="body-large" style={{ marginBottom: '1.5rem' }}>
+              {heroData.subtitle}
+            </p>
+            <p className="body-medium" style={{ marginBottom: '2rem', opacity: 0.8 }}>
+              {heroData.description}
+            </p>
+            
+            {/* Feature highlights */}
+            <div className="hero-features">
+              <div className="feature-check">
+                <Check size={18} />
+                <span>Sistema de gestão</span>
+              </div>
+              <div className="feature-check">
+                <Check size={18} />
+                <span>CRM integrado</span>
+              </div>
+              <div className="feature-check">
+                <Check size={18} />
+                <span>Inteligência Artificial</span>
+              </div>
+              <div className="feature-check">
+                <Check size={18} />
+                <span>Automações</span>
+              </div>
+            </div>
+
+            <div className="hero-cta">
+              <div className="cta-form">
+                <input 
+                  type="email" 
+                  placeholder="Insira seu email" 
+                  className="email-input"
+                />
+                <button className="btn-primary cta-button">
+                  Comece o teste de 7 dias grátis
+                </button>
+              </div>
+              <p className="cta-note">Teste grátis sem fidelidade</p>
+            </div>
+          </div>
+
+          {/* Right Visual */}
+          <div className="hero-visual">
+            <div className="professional-image">
+              <img 
+                src="https://images.unsplash.com/photo-1758525588803-fc7dc8096ba1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHByb2Zlc3Npb25hbCUyMHRhYmxldHxlbnwwfHx8fDE3NjUyMjAyMDR8MA&ixlib=rb-4.1.0&q=85" 
+                alt="Corretor profissional usando ImobiBrasil"
+                className="hero-person"
+              />
+              
+              {/* Floating UI Elements */}
+              <div className="floating-card revenue-card">
+                <div className="card-header">
+                  <span className="card-title">Valor total de vendas por dia</span>
+                </div>
+                <div className="card-value">R$ 1.504,68</div>
+                <div className="card-chart">
+                  <TrendingUp size={24} />
+                </div>
+              </div>
+
+              <div className="floating-card properties-card">
+                <div className="card-header">
+                  <div className="agent-avatar">
+                    <Users size={16} />
+                  </div>
+                  <div>
+                    <div className="agent-name">Bruno Barbosa</div>
+                    <div className="agent-role">Corretor</div>
+                  </div>
+                </div>
+                <div className="property-stats">
+                  <div className="stat-item">
+                    <span>Imóveis vendidos</span>
+                    <span className="stat-value">12</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="floating-card leads-card">
+                <div className="card-header">
+                  <MessageSquare size={16} />
+                  <span>Novos Leads</span>
+                </div>
+                <div className="leads-list">
+                  <div className="lead-item">
+                    <span className="lead-name">MARY - VÉSIA</span>
+                    <span className="lead-status pending">Pendente</span>
+                  </div>
+                  <div className="lead-item">
+                    <span className="lead-name">JOÃO - SILVA</span>
+                    <span className="lead-status contacted">Contatado</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="floating-card sales-card">
+                <div className="card-header">
+                  <Home size={16} />
+                  <span>Vendas realizadas</span>
+                </div>
+                <div className="card-value large">R$ 1.000.000,00</div>
+                <div className="card-subtitle">Este mês</div>
+              </div>
+
+              <div className="floating-card notification-card">
+                <div className="notification-content">
+                  <span className="notification-text">Bling qual foi o meu faturamento ontem?</span>
+                </div>
+                <div className="notification-response">
+                  <span>Olá! Ontem verificamos um total de R$ 34.562,86 em 247 vendidas!</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Metrics */}
         <div className="hero-metrics">
           {heroData.metrics.map((metric, index) => (
             <div key={index} className="metric-item">
@@ -99,15 +218,6 @@ const HeroSection = () => {
               <span className="metric-label">{metric.label}</span>
             </div>
           ))}
-        </div>
-
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="#teste" className="btn-primary" style={{ minWidth: '200px' }}>
-            {heroData.ctaText}
-          </a>
-          <a href="#recursos" className="btn-secondary" style={{ minWidth: '200px' }}>
-            Conheça os Recursos
-          </a>
         </div>
       </div>
     </section>
