@@ -411,13 +411,222 @@ body {
   -webkit-backdrop-filter: blur(10px);
   z-index: 3;
   animation: float 6s ease-in-out infinite;
+  min-width: 200px;
+  max-width: 280px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
 }
 
-.floating-card:nth-child(1) { animation-delay: -0s; }
-.floating-card:nth-child(2) { animation-delay: -1s; }
-.floating-card:nth-child(3) { animation-delay: -2s; }
-.floating-card:nth-child(4) { animation-delay: -3s; }
-.floating-card:nth-child(5) { animation-delay: -4s; }
+.floating-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.floating-card.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Conversation Card */
+.conversation-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.conversation-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.speaker-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+.conversation-item.corretor .speaker-label {
+  color: var(--text-primary);
+}
+
+.message {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.card-button {
+  background: var(--gradient-button);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.card-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(44, 166, 47, 0.3);
+}
+
+/* Decoration Card */
+.decoration-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.decoration-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.decoration-images {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.before-after {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.image-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.room-preview {
+  width: 60px;
+  height: 40px;
+  border-radius: 8px;
+  border: 2px solid var(--border-light);
+}
+
+.room-preview.empty {
+  background: #f5f5f5;
+}
+
+.room-preview.decorated {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.arrow {
+  font-size: 1.2rem;
+  color: var(--accent-primary);
+  font-weight: bold;
+}
+
+/* Lead Card */
+.lead-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.lead-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lead-avatar {
+  width: 32px;
+  height: 32px;
+  background: var(--accent-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.lead-info {
+  flex: 1;
+}
+
+.lead-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.lead-time {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.lead-message {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  background: var(--bg-section);
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+
+/* Portals Card */
+.portals-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.portals-header {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.property-info {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  padding: 0.5rem;
+  background: var(--bg-section);
+  border-radius: 8px;
+}
+
+.portals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.portal-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.portal-checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent-primary);
+}
+
+.portal-name {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
 
 .revenue-card {
   top: 10%;
