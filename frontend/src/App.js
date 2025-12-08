@@ -265,12 +265,12 @@ const HeroSection = () => {
               </div>
 
               {/* Floating Cards */}
-              {visibleCards.map((cardIndex, positionIndex) => (
+              {heroData.slides[currentSlide].cards.map((card) => (
                 <FloatingCard
-                  key={`${cardIndex}-${positionIndex}`}
-                  card={heroData.floatingCards[cardIndex]}
+                  key={card.id}
+                  card={card}
                   isVisible={true}
-                  position={cardPositions[positionIndex] || positions[0]}
+                  position={getPositionStyle(card.position)}
                 />
               ))}
             </div>
