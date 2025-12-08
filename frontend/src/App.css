@@ -1240,34 +1240,68 @@ body {
   .floating-card {
     padding: 0.75rem 1rem;
     font-size: 0.875rem;
-  }
-  
-  .revenue-card {
-    top: 5%;
-    left: -20%;
-    min-width: 160px;
-  }
-  
-  .properties-card {
-    top: 15%;
-    right: -25%;
-    min-width: 140px;
-  }
-  
-  .leads-card {
-    bottom: 25%;
-    left: -25%;
     min-width: 180px;
+    max-width: 220px;
   }
   
-  .sales-card {
-    bottom: 5%;
-    right: -20%;
-    min-width: 140px;
+  /* Adjust card positions for mobile */
+  .carousel-container {
+    height: 400px;
   }
   
-  .notification-card {
-    display: none; /* Hide on mobile for better UX */
+  .carousel-indicators {
+    bottom: -30px;
+  }
+  
+  .indicator {
+    width: 30px;
+    height: 4px;
+  }
+  
+  .indicator.active {
+    width: 45px;
+  }
+  
+  /* Mobile specific card styles */
+  .conversation-card {
+    gap: 0.5rem;
+  }
+  
+  .message {
+    font-size: 0.8rem;
+  }
+  
+  .card-button {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .decoration-images .before-after {
+    gap: 0.5rem;
+  }
+  
+  .room-preview {
+    width: 50px;
+    height: 35px;
+  }
+  
+  .lead-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+  
+  .lead-message {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+  
+  .portals-list {
+    gap: 0.4rem;
+  }
+  
+  .portal-name {
+    font-size: 0.8rem;
   }
   
   .hero-metrics {
