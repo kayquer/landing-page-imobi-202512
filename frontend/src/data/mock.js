@@ -9,6 +9,76 @@ export const heroData = {
     { value: "+15.000", label: "Imobiliárias Ativas" },
     { value: "+2M", label: "Imóveis Gerenciados" },
     { value: "+40%", label: "Aumento nas Vendas" }
+  ],
+  slides: [
+    {
+      id: 1,
+      image: "https://customer-assets.emergentagent.com/job_imobi-saas/artifacts/xbbz1r8m_1.png",
+      alt: "Corretor profissional masculino"
+    },
+    {
+      id: 2, 
+      image: "https://customer-assets.emergentagent.com/job_imobi-saas/artifacts/60bthldx_2.png",
+      alt: "Corretora profissional feminina"
+    }
+  ],
+  floatingCards: [
+    {
+      id: 1,
+      type: "conversation",
+      title: "Assistente IA",
+      content: {
+        corretor: "Cadastrar uma casa em condomínio com 4 quartos...",
+        imobibrasil: "De acordo com suas informações extraímos esses dados para a ficha do imóvel...",
+        button: "Cadastrar Imóvel"
+      }
+    },
+    {
+      id: 2,
+      type: "decoration",
+      title: "Decorar Interiores com IA",
+      content: {
+        beforeImage: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=200&h=120&fit=crop",
+        afterImage: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=200&h=120&fit=crop&overlay=gradient",
+        description: "IA para decoração"
+      }
+    },
+    {
+      id: 3,
+      type: "lead",
+      title: "Novo Lead",
+      content: {
+        name: "Maria",
+        message: "Olá, vi o imóvel no site e quero mais informações.",
+        button: "Qualificar Lead",
+        avatar: "M"
+      }
+    },
+    {
+      id: 4,
+      type: "lead",
+      title: "Novo Lead", 
+      content: {
+        name: "Lucas",
+        message: "Quero visitar o imóvel, quando podemos agendar?",
+        button: "Qualificar Lead",
+        avatar: "L"
+      }
+    },
+    {
+      id: 5,
+      type: "portals",
+      title: "Integração com Portais",
+      content: {
+        property: "Casa 3 quartos - R$ 450.000",
+        portals: [
+          { name: "VivaReal", checked: true },
+          { name: "ZAP", checked: true },
+          { name: "OLX", checked: false },
+          { name: "ImóvelWeb", checked: true }
+        ]
+      }
+    }
   ]
 };
 
