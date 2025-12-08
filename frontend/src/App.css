@@ -1255,8 +1255,13 @@ body {
   }
   
   .room-preview {
-    width: 50px;
-    height: 35px;
+    width: 60px;
+    height: 45px;
+  }
+  
+  /* Adjust fixed positions for mobile */
+  .floating-card {
+    transform: scale(0.9);
   }
   
   .lead-avatar {
