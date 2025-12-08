@@ -69,16 +69,155 @@ const Header = () => {
   );
 };
 
+// Floating Card Component
+const FloatingCard = ({ card, isVisible, position }) => {
+  const renderCardContent = () => {
+    switch (card.type) {
+      case 'conversation':
+        return (
+          <div className="conversation-card">
+            <div className="conversation-item corretor">
+              <div className="speaker-label">Corretor:</div>
+              <div className="message">{card.content.corretor}</div>
+            </div>
+            <div className="conversation-item imobibrasil">
+              <div className="speaker-label">ImobiBrasil:</div>
+              <div className="message">{card.content.imobibrasil}</div>
+            </div>
+            <button className="card-button">{card.content.button}</button>
+          </div>
+        );
+
+      case 'decoration':
+        return (
+          <div className="decoration-card">
+            <div className="decoration-title">{card.title}</div>
+            <div className="decoration-images">
+              <div className="before-after">
+                <div className="image-container">
+                  <span className="image-label">Antes</span>
+                  <div className="room-preview empty"></div>
+                </div>
+                <div className="arrow">→</div>
+                <div className="image-container">
+                  <span className="image-label">Depois</span>
+                  <div className="room-preview decorated"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'lead':
+        return (
+          <div className="lead-card">
+            <div className="lead-header">
+              <div className="lead-avatar">{card.content.avatar}</div>
+              <div className="lead-info">
+                <div className="lead-name">{card.content.name}</div>
+                <div className="lead-time">Agora</div>
+              </div>
+            </div>
+            <div className="lead-message">{card.content.message}</div>
+            <button className="card-button">{card.content.button}</button>
+          </div>
+        );
+
+      case 'portals':
+        return (
+          <div className="portals-card">
+            <div className="portals-header">{card.title}</div>
+            <div className="property-info">{card.content.property}</div>
+            <div className="portals-list">
+              {card.content.portals.map((portal, index) => (
+                <div key={index} className="portal-item">
+                  <input 
+                    type="checkbox" 
+                    checked={portal.checked} 
+                    readOnly
+                    className="portal-checkbox"
+                  />
+                  <span className="portal-name">{portal.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div 
+      className={`floating-card ${card.type}-card ${isVisible ? 'visible' : 'hidden'}`}
+      style={{
+        position: 'absolute',
+        top: position.top,
+        left: position.left,
+        right: position.right,
+        bottom: position.bottom,
+        transform: position.transform,
+      }}
+    >
+      {renderCardContent()}
+    </div>
+  );
+};
+
 // Hero Section Component
 const HeroSection = () => {
-  const [currentMetricIndex, setCurrentMetricIndex] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [visibleCards, setVisibleCards] = useState([0, 1, 2]);
+  const [cardPositions, setCardPositions] = useState([]);
 
+  // Posições possíveis para os cards
+  const positions = [
+    { top: '10%', left: '-15%', transform: 'translateX(0)' },
+    { top: '20%', right: '-20%', transform: 'translateX(0)' },
+    { bottom: '30%', left: '-10%', transform: 'translateX(0)' },
+    { bottom: '15%', right: '-15%', transform: 'translateX(0)' },
+    { top: '40%', left: '-25%', transform: 'translateX(0)' },
+    { top: '50%', right: '-25%', transform: 'translateX(0)' },
+  ];
+
+  // Embaralhar cards e posições
+  const shuffleCards = () => {
+    const shuffledCards = [...Array(heroData.floatingCards.length).keys()]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3);
+    
+    const shuffledPositions = [...positions]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3);
+    
+    setVisibleCards(shuffledCards);
+    setCardPositions(shuffledPositions);
+  };
+
+  // Carrossel de slides
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentMetricIndex(prev => (prev + 1) % heroData.metrics.length);
-    }, 3000);
+    const slideInterval = setInterval(() => {
+      setCurrentSlide(prev => (prev + 1) % heroData.slides.length);
+      shuffleCards(); // Embaralhar cards ao trocar slide
+    }, 7000);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(slideInterval);
+  }, []);
+
+  // Ciclo de cards (trocar cards visíveis)
+  useEffect(() => {
+    const cardInterval = setInterval(() => {
+      shuffleCards();
+    }, 4000);
+
+    return () => clearInterval(cardInterval);
+  }, []);
+
+  // Inicializar posições
+  useEffect(() => {
+    shuffleCards();
   }, []);
 
   return (
@@ -134,78 +273,44 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right Visual */}
+          {/* Right Visual - Carousel */}
           <div className="hero-visual">
-            <div className="professional-image">
-              <img 
-                src="https://images.unsplash.com/photo-1758525588803-fc7dc8096ba1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHByb2Zlc3Npb25hbCUyMHRhYmxldHxlbnwwfHx8fDE3NjUyMjAyMDR8MA&ixlib=rb-4.1.0&q=85" 
-                alt="Corretor profissional usando ImobiBrasil"
-                className="hero-person"
-              />
-              
-              {/* Floating UI Elements */}
-              <div className="floating-card revenue-card">
-                <div className="card-header">
-                  <span className="card-title">Valor total de vendas por dia</span>
-                </div>
-                <div className="card-value">R$ 1.504,68</div>
-                <div className="card-chart">
-                  <TrendingUp size={24} />
-                </div>
+            <div className="carousel-container">
+              <div className="carousel-track">
+                {heroData.slides.map((slide, index) => (
+                  <div 
+                    key={slide.id}
+                    className={`carousel-slide ${index === currentSlide ? 'active' : ''}`}
+                  >
+                    <img 
+                      src={slide.image}
+                      alt={slide.alt}
+                      className="hero-person"
+                    />
+                  </div>
+                ))}
               </div>
 
-              <div className="floating-card properties-card">
-                <div className="card-header">
-                  <div className="agent-avatar">
-                    <Users size={16} />
-                  </div>
-                  <div>
-                    <div className="agent-name">Bruno Barbosa</div>
-                    <div className="agent-role">Corretor</div>
-                  </div>
-                </div>
-                <div className="property-stats">
-                  <div className="stat-item">
-                    <span>Imóveis vendidos</span>
-                    <span className="stat-value">12</span>
-                  </div>
-                </div>
-              </div>
+              {/* Floating Cards */}
+              {visibleCards.map((cardIndex, positionIndex) => (
+                <FloatingCard
+                  key={`${cardIndex}-${positionIndex}`}
+                  card={heroData.floatingCards[cardIndex]}
+                  isVisible={true}
+                  position={cardPositions[positionIndex] || positions[0]}
+                />
+              ))}
+            </div>
 
-              <div className="floating-card leads-card">
-                <div className="card-header">
-                  <MessageSquare size={16} />
-                  <span>Novos Leads</span>
-                </div>
-                <div className="leads-list">
-                  <div className="lead-item">
-                    <span className="lead-name">MARY - VÉSIA</span>
-                    <span className="lead-status pending">Pendente</span>
-                  </div>
-                  <div className="lead-item">
-                    <span className="lead-name">JOÃO - SILVA</span>
-                    <span className="lead-status contacted">Contatado</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="floating-card sales-card">
-                <div className="card-header">
-                  <Home size={16} />
-                  <span>Vendas realizadas</span>
-                </div>
-                <div className="card-value large">R$ 1.000.000,00</div>
-                <div className="card-subtitle">Este mês</div>
-              </div>
-
-              <div className="floating-card notification-card">
-                <div className="notification-content">
-                  <span className="notification-text">Bling qual foi o meu faturamento ontem?</span>
-                </div>
-                <div className="notification-response">
-                  <span>Olá! Ontem verificamos um total de R$ 34.562,86 em 247 vendidas!</span>
-                </div>
-              </div>
+            {/* Carousel Indicators */}
+            <div className="carousel-indicators">
+              {heroData.slides.map((_, index) => (
+                <button
+                  key={index}
+                  className={`indicator ${index === currentSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentSlide(index)}
+                />
+              ))}
             </div>
           </div>
         </div>
