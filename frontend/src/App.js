@@ -169,55 +169,28 @@ const FloatingCard = ({ card, isVisible, position }) => {
 // Hero Section Component
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [visibleCards, setVisibleCards] = useState([0, 1, 2]);
-  const [cardPositions, setCardPositions] = useState([]);
 
-  // Posições possíveis para os cards
-  const positions = [
-    { top: '10%', left: '-15%', transform: 'translateX(0)' },
-    { top: '20%', right: '-20%', transform: 'translateX(0)' },
-    { bottom: '30%', left: '-10%', transform: 'translateX(0)' },
-    { bottom: '15%', right: '-15%', transform: 'translateX(0)' },
-    { top: '40%', left: '-25%', transform: 'translateX(0)' },
-    { top: '50%', right: '-25%', transform: 'translateX(0)' },
-  ];
-
-  // Embaralhar cards e posições
-  const shuffleCards = () => {
-    const shuffledCards = [...Array(heroData.floatingCards.length).keys()]
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 3);
-    
-    const shuffledPositions = [...positions]
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 3);
-    
-    setVisibleCards(shuffledCards);
-    setCardPositions(shuffledPositions);
+  // Posições fixas para evitar sobreposição
+  const getPositionStyle = (position) => {
+    switch (position) {
+      case 'top-left':
+        return { top: '10%', left: '-15%' };
+      case 'top-right':
+        return { top: '15%', right: '-15%' };
+      case 'bottom-right':
+        return { bottom: '20%', right: '-10%' };
+      default:
+        return { top: '10%', left: '-15%' };
+    }
   };
 
   // Carrossel de slides
   useEffect(() => {
     const slideInterval = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % heroData.slides.length);
-      shuffleCards(); // Embaralhar cards ao trocar slide
     }, 7000);
 
     return () => clearInterval(slideInterval);
-  }, []);
-
-  // Ciclo de cards (trocar cards visíveis)
-  useEffect(() => {
-    const cardInterval = setInterval(() => {
-      shuffleCards();
-    }, 4000);
-
-    return () => clearInterval(cardInterval);
-  }, []);
-
-  // Inicializar posições
-  useEffect(() => {
-    shuffleCards();
   }, []);
 
   return (
