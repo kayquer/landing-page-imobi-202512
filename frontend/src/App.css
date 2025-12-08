@@ -628,36 +628,7 @@ body {
   color: var(--text-secondary);
 }
 
-.revenue-card {
-  top: 10%;
-  left: -10%;
-  min-width: 200px;
-}
-
-.properties-card {
-  top: 20%;
-  right: -15%;
-  min-width: 180px;
-}
-
-.leads-card {
-  bottom: 35%;
-  left: -15%;
-  min-width: 220px;
-}
-
-.sales-card {
-  bottom: 15%;
-  right: -10%;
-  min-width: 180px;
-}
-
-.notification-card {
-  top: 50%;
-  left: -20%;
-  max-width: 250px;
-  transform: translateY(-50%);
-}
+/* Remove old specific card positioning - now handled by positions */
 
 .card-header {
   display: flex;
