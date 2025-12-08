@@ -96,12 +96,18 @@ const FloatingCard = ({ card, isVisible, position }) => {
               <div className="before-after">
                 <div className="image-container">
                   <span className="image-label">Antes</span>
-                  <div className="room-preview empty"></div>
+                  <div 
+                    className="room-preview before"
+                    style={{ backgroundImage: `url(${card.content.beforeImage})` }}
+                  ></div>
                 </div>
                 <div className="arrow">→</div>
                 <div className="image-container">
                   <span className="image-label">Depois</span>
-                  <div className="room-preview decorated"></div>
+                  <div 
+                    className="room-preview after"
+                    style={{ backgroundImage: `url(${card.content.afterImage})` }}
+                  ></div>
                 </div>
               </div>
             </div>
