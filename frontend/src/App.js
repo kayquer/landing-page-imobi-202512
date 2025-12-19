@@ -184,7 +184,7 @@ const HeroSection = () => {
       case 'top-right':
         return { top: '15%', right: '-15%' };
       case 'bottom-right':
-        return { bottom: '20%', right: '-10%' };
+        return { bottom: '5%', right: '-10%' };
       default:
         return { top: '10%', left: '-15%' };
     }
